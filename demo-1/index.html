@@ -1,0 +1,59 @@
+<html>
+	<head>
+		<title>Vue.js demo 1</title>
+		<meta charset="utf-8">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+	</head>
+	<body>
+		<header role="banner" class="page-header is-fixed-header">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+					<h1 class="h-txt--center">Vue.js demo 1</h1>
+				</div>
+			</div>
+		</header>
+		<main role="main" class="page-main is-fixed-header">
+			<section class="block" id="first">
+				<div class="container">
+					<div class="l-row">
+						<div class="l-col-lg--12">
+							<div class="row h-padding--top h-padding--right h-padding--bottom h-padding--left h-bgcolor--grey">
+								<h1 class="h-color--white">Test 1 | DOM manipulation</h1>
+							</div>
+							<!-- show DOM when name lenght is greater than zero -->
+							<div class="row h-padding--top" v-show="name.length > 0">
+								<h2>Hallo ik ben ${ name }</h2>
+							</div>
+							<!-- show DOM when name lenght is less than one -->
+							<div class="row h-padding--top" v-show="name.length < 1">
+								<p class="alert">Je moet een naam invullen</p>
+							</div>
+							<div class="row h-padding--top">
+								<input type="text" v-model="name" v-show="nameActive" />
+								<a class="btn--green" @click="editModeName()">Naam invullen</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script>
+			
+			new Vue({
+				delimiters: ['${', '}'], // Prevent Mustache syntax conflict
+				el: '#first',
+				data : {
+					name		: '',
+					age			: 29,
+					nameActive	: false
+				},
+				methods : {
+					editModeName : function(){
+						this.nameActive = true
+					}
+				}
+			});
+
+		</script>
+	</body>
+</hmtl>
