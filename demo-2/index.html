@@ -1,0 +1,85 @@
+<html>
+	<head>
+		<title>Vue.js demo 2</title>
+		<meta charset="utf-8">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+	</head>
+	<body>
+		<header role="banner" class="page-header is-fixed-header">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-6 col-xs-6">
+					<h1 class="h-txt--center">Vue.js demo 2</h1>
+				</div>
+			</div>
+		</header>
+		<main role="main" class="page-main is-fixed-header">
+			<section class="block" id="second">
+				<div class="container">
+					<div class="l-row">
+						<div class="l-col-lg--12">
+							<div class="ow h-padding--top h-padding--right h-padding--bottom h-padding--left h-bgcolor--grey">
+								<h1 class="h-color--white">Test 2 | number validation</h1>
+							</div>
+							<!-- show DOM when name lenght is greater than zero -->
+							<div class="row h-padding--top" v-show="name.length > 0">
+								<h2>Hallo ik ben ${ name }</h2>
+								<p v-show="age.length > 0">Ik ben ${ age } jaar oud</p>
+							</div>
+							<!-- show DOM when name lenght is less than one -->
+							<div class="row h-padding--top" v-show="name.length < 1">
+								<p class="alert">Je moet een naam invullen</p>
+							</div>
+							<div class="row h-padding--top">
+								<input type="text" v-model="name" v-show="nameActive" />
+								<a class="btn--green" @click="editModeName()">Naam invullen</a>
+							</div>
+							<div class="row h-padding--top">
+								<input type="number" v-model="age" v-show="ageActive" />
+								<a class="btn--green" @click="editModeAge()">Leeftijd invullen</a>
+							</div>
+							<div class="row h-padding--top" v-show="ageNumber">
+								<p class="alert">Je moet een nummmer invullen</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<script>
+			
+			new Vue({
+				delimiters: ['${', '}'], // Prevent Mustache syntax conflict
+				el: '#second',
+				data : {
+					name		: '',
+					age			: '',
+					nameActive	: false,
+					ageActive	: false,
+					ageNumber	: false
+				},
+				methods : {
+					editModeName : function(){
+						if (this.nameActive === true) {
+							this.nameActive = false
+						} else {
+							this.nameActive = true
+						}
+					},
+					editModeAge : function(){
+						if (this.ageActive === true) {
+							if(!isNaN(parseFloat(this.age)) && isFinite(this.age)) {
+								this.ageActive = false
+								this.ageNumber = false
+							} else {
+								this.ageNumber = true
+							}
+						} else {
+							this.ageActive = true
+						}
+					}
+				}
+			});
+			
+		</script>
+	</body>
+</hmtl>
